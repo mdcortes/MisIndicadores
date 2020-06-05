@@ -1,5 +1,6 @@
 package com.prueba.misindicadores.ui.login
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,12 +15,20 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import com.prueba.misindicadores.MisIndicadoresApplication
 import com.prueba.misindicadores.R
+import javax.inject.Inject
 
-class LoginFragment : Fragment() {
+class LoginFragment: Fragment() {
+    @Inject
+    lateinit var loginViewModel: LoginViewModel
 
-    private lateinit var loginViewModel: LoginViewModel
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (activity?.application!! as MisIndicadoresApplication).appComponent.loginComponent()
+            .create().inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,15 +40,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
-            .get(LoginViewModel::class.java)
 
         val usernameEditText = view.findViewById<EditText>(R.id.username)
         val passwordEditText = view.findViewById<EditText>(R.id.password)
         val loginButton = view.findViewById<Button>(R.id.login)
         val loadingProgressBar = view.findViewById<ProgressBar>(R.id.loading)
 
-        loginViewModel.loginFormState.observe(this,
+        loginViewModel.loginFormState.observe(viewLifecycleOwner,
             Observer { loginFormState ->
                 if (loginFormState == null) {
                     return@Observer
@@ -53,7 +60,7 @@ class LoginFragment : Fragment() {
                 }
             })
 
-        loginViewModel.loginResult.observe(this,
+        loginViewModel.loginResult.observe(viewLifecycleOwner,
             Observer { loginResult ->
                 loginResult ?: return@Observer
                 loadingProgressBar.visibility = View.GONE
