@@ -1,6 +1,8 @@
 package com.prueba.misindicadores.data
 
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.core.content.edit
 import com.prueba.misindicadores.data.model.LoggedInUser
 import java.io.IOException
 import javax.inject.Inject
@@ -15,22 +17,38 @@ class UserDataSource @Inject constructor(private val context: Context){
         const val USER_IDS_FILE_NAME = "user_ids"
         const val USER_PASSWORDS_FILE_NAME = "user_passwords"
         const val USER_DISPLAY_NAMES_FILE_NAME = "user_display_names"
-        const val USER_IS_LOGGED_IN = "user_is_logged_in"
+        const val LOGGED_IN_USER = "logged_in_user"
+
+        const val CURRENT_LOGGED_IN_USER = "current_logged_in_user"
     }
 
-    private val userIdsSharedPreferences = context.getSharedPreferences(
-        USER_IDS_FILE_NAME, Context.MODE_PRIVATE)
-    private val userPasswordsSharedPreferences = context.getSharedPreferences(
-        USER_PASSWORDS_FILE_NAME, Context.MODE_PRIVATE)
-    private val userDisplayNamesSharedPreferences = context.getSharedPreferences(
-        USER_DISPLAY_NAMES_FILE_NAME, Context.MODE_PRIVATE)
+    private fun getPrivateSharedPreferences(fileName: String)
+            = context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
+
+    private val userIdsSharedPreferences
+        get() =  getPrivateSharedPreferences(USER_IDS_FILE_NAME)
+
+    private val userPasswordsSharedPreferences
+        get() = getPrivateSharedPreferences( USER_PASSWORDS_FILE_NAME)
+
+    private val userDisplayNamesSharedPreferences
+        get()  = getPrivateSharedPreferences(USER_DISPLAY_NAMES_FILE_NAME)
+
+    private val loggedInUserSharedPreferences
+        get() = getPrivateSharedPreferences(LOGGED_IN_USER)
 
     fun login(username: String, password: String): Result<LoggedInUser> {
         try {
-            if (userPasswordsSharedPreferences.contains(username)) {
-                val storedPassword = userPasswordsSharedPreferences.getString(username, null)
+            if (userIdsSharedPreferences.contains(username)) {
+                val userId = userIdsSharedPreferences.getString(username, null)
+                val storedPassword = userPasswordsSharedPreferences.getString(userId, null)
 
                 if (password == storedPassword) {
+                    loggedInUserSharedPreferences.edit {
+                        putString(CURRENT_LOGGED_IN_USER, userId)
+                        apply()
+                    }
+
                     return Result.Success(
                         LoggedInUser(
                             userIdsSharedPreferences.getString(username, "")!!,
@@ -47,7 +65,22 @@ class UserDataSource @Inject constructor(private val context: Context){
         return Result.Error(IOException("Error logging in"))
     }
 
+    fun isLoggedInUser() = loggedInUserSharedPreferences.contains(CURRENT_LOGGED_IN_USER)
+
+    fun getCurrentUser(): LoggedInUser? {
+        return if (isLoggedInUser()) {
+            val userId = loggedInUserSharedPreferences.getString(CURRENT_LOGGED_IN_USER, "")
+            LoggedInUser(
+                userId!!,
+                userDisplayNamesSharedPreferences.getString(userId, "")!!
+            )
+        } else null
+    }
+
     fun logout() {
-        // TODO: revoke authentication
+        loggedInUserSharedPreferences.edit {
+            remove(CURRENT_LOGGED_IN_USER)
+            apply()
+        }
     }
 }
