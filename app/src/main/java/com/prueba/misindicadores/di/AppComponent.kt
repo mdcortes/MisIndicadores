@@ -4,6 +4,7 @@ import android.content.Context
 import com.prueba.misindicadores.data.UserManager
 import com.prueba.misindicadores.di.subcomponents.AppSubcomponents
 import com.prueba.misindicadores.di.subcomponents.LoginComponent
+import com.prueba.misindicadores.di.subcomponents.RegisterComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -18,5 +19,6 @@ interface AppComponent {
     }
 
     fun loginComponent(): LoginComponent.Factory
+    fun registerComponent(): RegisterComponent.Factory
     fun userManager(): UserManager
 }

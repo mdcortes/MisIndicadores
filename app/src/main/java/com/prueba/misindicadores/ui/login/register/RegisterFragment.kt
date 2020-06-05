@@ -1,5 +1,6 @@
 package com.prueba.misindicadores.ui.login.register
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.text.Editable
@@ -16,8 +17,10 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.prueba.misindicadores.MisIndicadoresApplication
 import com.prueba.misindicadores.R
 import com.prueba.misindicadores.ui.login.LoggedInUserView
+import javax.inject.Inject
 
 class RegisterFragment : Fragment() {
 
@@ -26,9 +29,17 @@ class RegisterFragment : Fragment() {
             RegisterFragment()
     }
 
-    private lateinit var registerViewModel: RegisterViewModel
+    @Inject
+    lateinit var registerViewModel: RegisterViewModel
 
     private val args: RegisterFragmentArgs by navArgs()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (activity?.application!! as MisIndicadoresApplication).appComponent.registerComponent()
+            .create().inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -120,12 +131,6 @@ class RegisterFragment : Fragment() {
                 passwordEditText.text.toString()
             )
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        registerViewModel = ViewModelProviders.of(this).get(RegisterViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {

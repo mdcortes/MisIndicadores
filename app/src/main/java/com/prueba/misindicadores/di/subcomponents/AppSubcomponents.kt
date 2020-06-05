@@ -22,7 +22,8 @@ import dagger.Module
 @Module(
     subcomponents = [
         UserComponent::class,
-        LoginComponent::class
+        LoginComponent::class,
+        RegisterComponent::class
     ]
 )
 class AppSubcomponents
