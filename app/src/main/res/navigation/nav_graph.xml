@@ -19,5 +19,12 @@
         android:id="@+id/register_fragment"
         android:name="com.prueba.misindicadores.ui.register.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+    </fragment>
 </navigation>

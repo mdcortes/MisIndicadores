@@ -8,21 +8,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.prueba.misindicadores.MisIndicadoresApplication
 import com.prueba.misindicadores.R
+import com.prueba.misindicadores.ui.register.RegisterFragment
 import javax.inject.Inject
 
 class LoginFragment: Fragment() {
     @Inject
     lateinit var loginViewModel: LoginViewModel
+
+    lateinit var usernameEditText: EditText
+    lateinit var passwordEditText: EditText
+    lateinit var loginButton: Button
+    lateinit var registerButton: Button
+    lateinit var loadingProgressBar: ProgressBar
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -42,11 +47,11 @@ class LoginFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val usernameEditText = view.findViewById<EditText>(R.id.username)
-        val passwordEditText = view.findViewById<EditText>(R.id.password)
-        val loginButton = view.findViewById<Button>(R.id.login)
-        val registerButton = view.findViewById<Button>(R.id.register)
-        val loadingProgressBar = view.findViewById<ProgressBar>(R.id.loading)
+        usernameEditText = view.findViewById(R.id.username)
+        passwordEditText = view.findViewById(R.id.password)
+        loginButton = view.findViewById(R.id.login)
+        registerButton = view.findViewById(R.id.register)
+        loadingProgressBar = view.findViewById(R.id.loading)
 
         loginViewModel.loginFormState.observe(viewLifecycleOwner,
             Observer { loginFormState ->
@@ -110,10 +115,14 @@ class LoginFragment: Fragment() {
             )
         }
 
-        registerButton.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.register_fragment, null)
-        )
+        registerButton.setOnClickListener {
+            findNavController().navigate(createRegisterNavDirections())
+        }
     }
+    private fun createRegisterNavDirections() = LoginFragmentDirections.register(
+        usernameEditText.text.toString(),
+        passwordEditText.text.toString()
+    )
 
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome) + model.displayName

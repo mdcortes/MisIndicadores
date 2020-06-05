@@ -9,5 +9,5 @@
     <string name="invalid_password">La contraseña debe tener al menos 5 caracteres</string>
     <string name="login_failed">Login no exitoso</string>
     <string name="prompt_display_name">Nombre</string>
-    <string name="action_register">Registrar</string>
+    <string name="action_register">Registrarse</string>
 </resources>
