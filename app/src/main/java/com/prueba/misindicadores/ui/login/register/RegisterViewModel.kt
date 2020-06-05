@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.prueba.misindicadores.R
+import com.prueba.misindicadores.data.Result
 import com.prueba.misindicadores.data.UserManager
+import com.prueba.misindicadores.ui.login.LoggedInUserView
 import com.prueba.misindicadores.ui.login.LoginChecks
+import com.prueba.misindicadores.ui.login.LoginResult
 import javax.inject.Inject
 
 class RegisterViewModel @Inject constructor(private val userManager: UserManager) : ViewModel() {
@@ -18,7 +21,14 @@ class RegisterViewModel @Inject constructor(private val userManager: UserManager
     val registerResult: LiveData<RegisterResult> = _registerResult
 
     fun register(email: String, name: String, password: String) {
+        val result = userManager.register(username = email, displayName = name, password = password)
 
+        if (result is Result.Success) {
+            _registerResult.value =
+                RegisterResult(success = LoggedInUserView(displayName = result.data.displayName))
+        } else {
+            _registerResult.value = RegisterResult(error = R.string.login_failed)
+        }
     }
 
     fun registerDataChanged(username: String, displayName: String, password: String) {

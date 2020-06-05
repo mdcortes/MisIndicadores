@@ -16,6 +16,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.prueba.misindicadores.MisIndicadoresApplication
 import com.prueba.misindicadores.R
@@ -135,9 +136,10 @@ class RegisterFragment : Fragment() {
 
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome) + model.displayName
-        // TODO : initiate successful logged in experience
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
+
+        findNavController().navigate(R.id.login_from_register)
     }
 
     private fun showRegisterFailed(@StringRes errorString: Int) {

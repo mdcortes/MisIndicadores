@@ -18,6 +18,13 @@ class LoginViewModel @Inject constructor(private val userManager: UserManager) :
 
     private var loginChecks = LoginChecks()
 
+    init {
+        if (userManager.isLoggedIn) {
+            _loginResult.value = LoginResult(success = LoggedInUserView(
+                displayName = userManager.user!!.displayName))
+        }
+    }
+
     fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
         val result = userManager.login(username, password)

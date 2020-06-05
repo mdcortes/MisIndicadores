@@ -13,6 +13,10 @@
         <action
             android:id="@+id/register"
             app:destination="@+id/register_fragment" />
+
+        <action
+            android:id="@+id/login"
+            app:destination="@+id/indicators_fragment" />
     </fragment>
 
     <fragment
@@ -26,5 +30,19 @@
         <argument
             android:name="password"
             app:argType="string" />
+
+        <action
+            android:id="@+id/login_from_register"
+            app:destination="@+id/indicators_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/indicators_fragment"
+        android:name="com.prueba.misindicadores.ui.indicators.IndicatorsFragment"
+        android:label="fragment_indicators"
+        tools:layout="@layout/fragment_indicators" >
+        <action
+            android:id="@+id/logout"
+            app:destination="@+id/login_fragment" />
     </fragment>
 </navigation>

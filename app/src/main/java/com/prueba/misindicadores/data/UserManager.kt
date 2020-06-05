@@ -34,10 +34,15 @@ class UserManager @Inject constructor(private val dataSource: UserDataSource,
         }
     }
 
-    fun logout() {
-        dataSource.logout()
-        user = null
-        userComponent = null
+    fun logout(): Result<Unit> {
+        val result = dataSource.logout()
+
+        if (result is Result.Success) {
+            user = null
+            userComponent = null
+        }
+
+        return result
     }
 
     fun login(username: String, password: String): Result<LoggedInUser> {

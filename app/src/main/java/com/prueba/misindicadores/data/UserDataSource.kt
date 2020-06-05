@@ -111,10 +111,16 @@ class UserDataSource @Inject constructor(private val context: Context){
         } else null
     }
 
-    fun logout() {
-        loggedInUserSharedPreferences.edit {
-            remove(CURRENT_LOGGED_IN_USER)
-            apply()
+    fun logout(): Result<Unit> {
+        if (isLoggedInUser()) {
+            loggedInUserSharedPreferences.edit {
+                remove(CURRENT_LOGGED_IN_USER)
+                apply()
+            }
+
+            return Result.Success(Unit)
         }
+
+        return Result.Error(IOException("No user logged in"))
     }
 }

@@ -16,4 +16,7 @@
     <string name="prompt_display_name">Name</string>
     <string name="action_register">Register</string>
     <string name="invalid_display_name">Name must be >5 characters</string>
+
+    <!-- Strings related to Indicators view -->
+    <string name="logout_failed">Logout failed</string>
 </resources>

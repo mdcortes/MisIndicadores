@@ -23,7 +23,8 @@ import dagger.Module
     subcomponents = [
         UserComponent::class,
         LoginComponent::class,
-        RegisterComponent::class
+        RegisterComponent::class,
+        IndicatorsComponent::class
     ]
 )
 class AppSubcomponents
