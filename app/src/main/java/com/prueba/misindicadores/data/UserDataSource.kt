@@ -3,9 +3,11 @@ package com.prueba.misindicadores.data
 import android.content.Context
 import androidx.core.content.edit
 import com.prueba.misindicadores.data.model.LoggedInUser
+import com.securepreferences.SecurePreferences
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
+
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
@@ -21,8 +23,11 @@ class UserDataSource @Inject constructor(private val context: Context){
         const val CURRENT_LOGGED_IN_USER = "current_logged_in_user"
     }
 
+    // Debido al requisito de que la app debía funcionar en API >= 21, no fue posible usar la
+    // librería de AndroidX para criptografía.
+    // Por simplicidad, se usó ésta librería: https://github.com/scottyab/secure-preferences
     private fun getPrivateSharedPreferences(fileName: String)
-            = context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
+            = SecurePreferences(context, "null", fileName)
 
     private val userIdsSharedPreferences
         get() =  getPrivateSharedPreferences(USER_IDS_FILE_NAME)
