@@ -12,11 +12,9 @@ import android.widget.*
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.prueba.misindicadores.MisIndicadoresApplication
 import com.prueba.misindicadores.R
-import com.prueba.misindicadores.ui.register.RegisterFragment
 import javax.inject.Inject
 
 class LoginFragment: Fragment() {

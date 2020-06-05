@@ -10,4 +10,5 @@
     <string name="login_failed">Login no exitoso</string>
     <string name="prompt_display_name">Nombre</string>
     <string name="action_register">Registrarse</string>
+    <string name="invalid_display_name">El nombre debe tener al menos 5 caracteres</string>
 </resources>

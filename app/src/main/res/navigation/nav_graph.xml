@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/register_fragment"
-        android:name="com.prueba.misindicadores.ui.register.RegisterFragment"
+        android:name="com.prueba.misindicadores.ui.login.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <argument
