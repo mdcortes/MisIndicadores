@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.prueba.misindicadores.MisIndicadoresApplication
 import com.prueba.misindicadores.R
 import javax.inject.Inject
@@ -44,6 +45,7 @@ class LoginFragment: Fragment() {
         val usernameEditText = view.findViewById<EditText>(R.id.username)
         val passwordEditText = view.findViewById<EditText>(R.id.password)
         val loginButton = view.findViewById<Button>(R.id.login)
+        val registerButton = view.findViewById<Button>(R.id.register)
         val loadingProgressBar = view.findViewById<ProgressBar>(R.id.loading)
 
         loginViewModel.loginFormState.observe(viewLifecycleOwner,
@@ -107,6 +109,10 @@ class LoginFragment: Fragment() {
                 passwordEditText.text.toString()
             )
         }
+
+        registerButton.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.register_fragment, null)
+        )
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {

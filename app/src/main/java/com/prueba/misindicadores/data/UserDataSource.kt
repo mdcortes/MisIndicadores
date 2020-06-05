@@ -1,7 +1,6 @@
 package com.prueba.misindicadores.data
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.prueba.misindicadores.data.model.LoggedInUser
 import java.io.IOException
