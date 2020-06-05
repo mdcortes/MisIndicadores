@@ -36,6 +36,41 @@ class UserDataSource @Inject constructor(private val context: Context){
     private val loggedInUserSharedPreferences
         get() = getPrivateSharedPreferences(LOGGED_IN_USER)
 
+    fun register(username: String, displayName: String, password: String): Result<LoggedInUser> {
+        if(userIdsSharedPreferences.contains(username)) {
+            return Result.Error(IOException("Error on registration"))
+        }
+
+        val uuid = java.util.UUID.randomUUID().toString()
+
+        userIdsSharedPreferences.edit {
+            putString(username, uuid)
+            apply()
+        }
+
+        userDisplayNamesSharedPreferences.edit {
+            putString(uuid, displayName)
+            apply()
+        }
+
+        userPasswordsSharedPreferences.edit() {
+            putString(uuid, password)
+            apply()
+        }
+
+        loggedInUserSharedPreferences.edit {
+            putString(CURRENT_LOGGED_IN_USER, uuid)
+            apply()
+        }
+
+        return Result.Success(
+            LoggedInUser(
+                uuid,
+                displayName
+            )
+        )
+    }
+
     fun login(username: String, password: String): Result<LoggedInUser> {
         try {
             if (userIdsSharedPreferences.contains(username)) {

@@ -51,6 +51,16 @@ class UserManager @Inject constructor(private val dataSource: UserDataSource,
         return result
     }
 
+    fun register(username: String, displayName: String, password: String): Result<LoggedInUser> {
+        val result = dataSource.register(username, displayName, password)
+
+        if (result is Result.Success) {
+            setLoggedInUser(result.data)
+        }
+
+        return result
+    }
+
     private fun setLoggedInUser(loggedInUser: LoggedInUser) {
         user = loggedInUser
         userComponent = userComponentFactory.create()
