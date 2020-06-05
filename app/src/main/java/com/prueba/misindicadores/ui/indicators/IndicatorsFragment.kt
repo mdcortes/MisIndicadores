@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.prueba.misindicadores.MisIndicadoresApplication
@@ -41,7 +42,15 @@ class IndicatorsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var userGreetingTextView = view.findViewById<TextView>(R.id.user_greeting)
         var logoutButton = view.findViewById<Button>(R.id.logout)
+
+        indicatorsViewModel.currentUser.observe(viewLifecycleOwner,
+            Observer {
+                it?: return@Observer
+
+                userGreetingTextView.text = getString(R.string.user_greeting, it.displayName)
+            })
 
         indicatorsViewModel.logoutResult.observe(viewLifecycleOwner,
             Observer {
