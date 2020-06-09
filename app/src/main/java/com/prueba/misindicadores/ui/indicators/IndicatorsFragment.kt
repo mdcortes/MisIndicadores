@@ -1,10 +1,10 @@
 package com.prueba.misindicadores.ui.indicators
 
+import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -33,6 +33,8 @@ class IndicatorsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
+
         binding = FragmentIndicatorsBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = viewLifecycleOwner
@@ -77,5 +79,27 @@ class IndicatorsFragment : Fragment() {
 
     private fun onLogoutComplete() {
         findNavController().navigate(R.id.logout)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.options_menu, menu)
+
+        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu.findItem(R.id.code_search).actionView as SearchView).apply {
+            setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+            setOnQueryTextListener(onQuery)
+        }
+    }
+
+    private val onQuery: SearchView.OnQueryTextListener = object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String): Boolean {
+            indicatorsViewModel.filterByCode(query)
+            return true
+        }
+
+        override fun onQueryTextChange(newText: String): Boolean {
+            indicatorsViewModel.filterByCode(newText)
+            return true
+        }
     }
 }

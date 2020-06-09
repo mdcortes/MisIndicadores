@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mis Indicadores</string>
+    <string name="app_name" translatable="false">Mis Indicadores</string>
 
     <!-- Strings common to login and register  -->
     <string name="prompt_email">Email</string>
@@ -8,24 +8,31 @@
     <string name="invalid_password">Password must be >5 characters</string>
 
     <!-- Strings related to login -->
+    <string name="login_title">Login</string>
     <string name="action_sign_in">Sign in</string>
     <string name="welcome">"Welcome!"</string>
     <string name="login_failed">Login Failed</string>
 
     <!-- Strings related to register -->
+    <string name="register_title">Register</string>
     <string name="prompt_display_name">Name</string>
     <string name="action_register">Register</string>
     <string name="invalid_display_name">Name must be >5 characters</string>
 
     <!-- Strings related to Indicators view -->
+    <string name="indicators_title">My Indicators</string>
     <string name="user_greeting">Hello %1$s</string>
     <string name="logout_failed">Logout failed</string>
     <string name="indicator_value">Value: %1$.2f</string>
     <string name="indicator_name">Name: %1$s</string>
     <string name="logout">Logout</string>
+
+    <!-- Strings related to Indicator Detail view -->
+    <string name="indicator_details_title">Indicator Details</string>
     <string name="indicator_code_label">Code:</string>
     <string name="indicator_name_label">Name:</string>
     <string name="indicator_unit_label">Measurement unit:</string>
     <string name="indicator_date_label">Date:</string>
     <string name="indicator_value_label">Value:</string>
+    <string name="code_search_title">Search by code</string>
 </resources>

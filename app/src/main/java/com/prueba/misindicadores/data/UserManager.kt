@@ -14,7 +14,6 @@ class UserManager @Inject constructor(private val dataSource: UserDataSource,
                                       private val userComponentFactory: UserComponent.Factory) {
 
     private var userComponent: UserComponent? = null
-        private set
 
     // in-memory cache of the loggedInUser object
     var user: LoggedInUser? = null

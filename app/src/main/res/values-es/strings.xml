@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mis Indicadores</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Contraseña</string>
-    <string name="action_sign_in">Iniciar sesión o registrarse</string>
+    <string name="action_sign_in">Iniciar sesión</string>
     <string name="welcome">¡Bienvenido!</string>
     <string name="invalid_username">No es un usuario válido</string>
     <string name="invalid_password">La contraseña debe tener más de 5 caracteres</string>
@@ -21,4 +20,9 @@
     <string name="indicator_unit_label">Unidad de medida:</string>
     <string name="indicator_date_label">Fecha:</string>
     <string name="indicator_value_label">Valor:</string>
+    <string name="login_title">Iniciar sesión</string>
+    <string name="register_title">Registrarse</string>
+    <string name="indicators_title">Mis Indicadores</string>
+    <string name="indicator_details_title">Detalles Indicador</string>
+    <string name="code_search_title">Buscar por código</string>
 </resources>
