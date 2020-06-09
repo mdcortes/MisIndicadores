@@ -19,13 +19,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.prueba.misindicadores.MisIndicadoresApplication
 import com.prueba.misindicadores.R
+import com.prueba.misindicadores.databinding.FragmentRegisterBinding
 import com.prueba.misindicadores.ui.login.LoggedInUserView
+import kotlinx.android.synthetic.main.fragment_register.*
 import javax.inject.Inject
 
 class RegisterFragment : Fragment() {
 
     @Inject
     lateinit var registerViewModel: RegisterViewModel
+    private lateinit var binding: FragmentRegisterBinding
 
     private val args: RegisterFragmentArgs by navArgs()
 
@@ -40,21 +43,15 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_register, container, false)
+        binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val usernameEditText = view.findViewById<EditText>(R.id.username)
-        val displayNameEditText = view.findViewById<EditText>(R.id.display_name)
-        val passwordEditText = view.findViewById<EditText>(R.id.password)
-        val registerButton = view.findViewById<Button>(R.id.register)
-
-        val loadingProgressBar = view.findViewById<ProgressBar>(R.id.loading)
-
-        usernameEditText.setText(args.email)
-        passwordEditText.setText(args.password)
+        username.setText(args.email)
+        password.setText(args.password)
 
         registerViewModel.registerFormState.observe(viewLifecycleOwner,
             Observer { registerFormState ->
@@ -62,15 +59,15 @@ class RegisterFragment : Fragment() {
                     return@Observer
                 }
 
-                registerButton.isEnabled = registerFormState.isDataValid
+                register.isEnabled = registerFormState.isDataValid
                 registerFormState.usernameError?.let {
-                    usernameEditText.error = getString(it)
+                    username.error = getString(it)
                 }
                 registerFormState.displayNameError?.let {
-                    displayNameEditText.error = getString(it)
+                    display_name.error = getString(it)
                 }
                 registerFormState.passwordError?.let {
-                    passwordEditText.error = getString(it)
+                    password.error = getString(it)
                 }
             })
 
@@ -78,7 +75,7 @@ class RegisterFragment : Fragment() {
             Observer { registerResult ->
                 registerResult ?: return@Observer
 
-                loadingProgressBar.visibility = View.GONE
+                loading.visibility = View.GONE
 
                 registerResult.error?.let {
                     showRegisterFailed(it)
@@ -99,31 +96,31 @@ class RegisterFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable) {
                 registerViewModel.registerDataChanged(
-                    usernameEditText.text.toString(),
-                    displayNameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    username.text.toString(),
+                    display_name.text.toString(),
+                    password.text.toString()
                 )
             }
         }
-        usernameEditText.addTextChangedListener(afterTextChangedListener)
-        passwordEditText.addTextChangedListener(afterTextChangedListener)
-        passwordEditText.setOnEditorActionListener { _, actionId, _ ->
+        username.addTextChangedListener(afterTextChangedListener)
+        password.addTextChangedListener(afterTextChangedListener)
+        password.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 registerViewModel.register(
-                    usernameEditText.text.toString(),
-                    displayNameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    username.text.toString(),
+                    display_name.text.toString(),
+                    password.text.toString()
                 )
             }
             false
         }
 
-        registerButton.setOnClickListener {
-            loadingProgressBar.visibility = View.VISIBLE
+        register.setOnClickListener {
+            loading.visibility = View.VISIBLE
             registerViewModel.register(
-                usernameEditText.text.toString(),
-                displayNameEditText.text.toString(),
-                passwordEditText.text.toString()
+                username.text.toString(),
+                display_name.text.toString(),
+                password.text.toString()
             )
         }
     }
