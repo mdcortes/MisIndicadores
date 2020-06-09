@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class UserManager @Inject constructor(private val dataSource: UserDataSource,
                                       private val userComponentFactory: UserComponent.Factory) {
 
-    var userComponent: UserComponent? = null
+    private var userComponent: UserComponent? = null
         private set
 
     // in-memory cache of the loggedInUser object

@@ -17,7 +17,6 @@
 package com.prueba.misindicadores.di.subcomponents
 
 import com.prueba.misindicadores.di.scopes.LoggedUserScope
-import com.prueba.misindicadores.ui.login.LoginFragment
 import dagger.Subcomponent
 
 @LoggedUserScope

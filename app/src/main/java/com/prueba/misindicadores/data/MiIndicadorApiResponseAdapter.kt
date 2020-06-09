@@ -20,7 +20,7 @@ class MiIndicadorApiResponseAdapter : JsonDeserializer<MiIndicadorApiResponse> {
 
         val indicatorList = mutableListOf<Indicator>()
         val gson = Gson()
-        var jsonObject = json!!.asJsonObject
+        val jsonObject = json!!.asJsonObject
 
         for (elementJson in jsonObject.entrySet()) {
             when(elementJson.key) {

@@ -1,6 +1,5 @@
 package com.prueba.misindicadores.di.subcomponents
 
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.prueba.misindicadores.data.IndicatorsDataSource
 import com.prueba.misindicadores.data.MiIndicadorApiResponse

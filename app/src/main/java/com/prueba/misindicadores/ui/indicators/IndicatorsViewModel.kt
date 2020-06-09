@@ -8,11 +8,10 @@ import com.prueba.misindicadores.data.IndicatorsRepository
 import com.prueba.misindicadores.data.Result
 import com.prueba.misindicadores.data.UserManager
 import com.prueba.misindicadores.data.model.Indicator
-import com.prueba.misindicadores.data.model.LoggedInUser
 import javax.inject.Inject
 
 class IndicatorsViewModel @Inject constructor(private val userManager: UserManager,
-                                              private val indicatorsRepository: IndicatorsRepository) : ViewModel() {
+                                              indicatorsRepository: IndicatorsRepository) : ViewModel() {
 
     private val _currentUser = MutableLiveData<String>()
     val currentUser: LiveData<String> get() = _currentUser

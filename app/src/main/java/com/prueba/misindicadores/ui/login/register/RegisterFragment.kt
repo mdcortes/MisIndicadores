@@ -1,11 +1,9 @@
 package com.prueba.misindicadores.ui.login.register
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +13,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -24,11 +23,6 @@ import com.prueba.misindicadores.ui.login.LoggedInUserView
 import javax.inject.Inject
 
 class RegisterFragment : Fragment() {
-
-    companion object {
-        fun newInstance() =
-            RegisterFragment()
-    }
 
     @Inject
     lateinit var registerViewModel: RegisterViewModel
@@ -52,12 +46,12 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var usernameEditText = view.findViewById<EditText>(R.id.username)
-        var displayNameEditText = view.findViewById<EditText>(R.id.display_name)
-        var passwordEditText = view.findViewById<EditText>(R.id.password)
-        var registerButton = view.findViewById<Button>(R.id.register)
+        val usernameEditText = view.findViewById<EditText>(R.id.username)
+        val displayNameEditText = view.findViewById<EditText>(R.id.display_name)
+        val passwordEditText = view.findViewById<EditText>(R.id.password)
+        val registerButton = view.findViewById<Button>(R.id.register)
 
-        var loadingProgressBar = view.findViewById<ProgressBar>(R.id.loading)
+        val loadingProgressBar = view.findViewById<ProgressBar>(R.id.loading)
 
         usernameEditText.setText(args.email)
         passwordEditText.setText(args.password)

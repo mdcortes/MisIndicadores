@@ -23,9 +23,9 @@ class LoginFragment: Fragment() {
 
     lateinit var usernameEditText: EditText
     lateinit var passwordEditText: EditText
-    lateinit var loginButton: Button
-    lateinit var registerButton: Button
-    lateinit var loadingProgressBar: ProgressBar
+    private lateinit var loginButton: Button
+    private lateinit var registerButton: Button
+    private lateinit var loadingProgressBar: ProgressBar
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
