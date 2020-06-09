@@ -58,14 +58,6 @@ class IndicatorsFragment : Fragment() {
             adapter = IndicatorsAdapter(mutableListOf())
         }
 
-        indicatorsViewModel.currentUser.observe(viewLifecycleOwner,
-            Observer {
-                it?: return@Observer
-
-
-                user_greeting_textview.text = getString(R.string.user_greeting, it.displayName)
-            })
-
         indicatorsViewModel.logoutResult.observe(viewLifecycleOwner,
             Observer {
                 it?: return@Observer

@@ -14,8 +14,8 @@ import javax.inject.Inject
 class IndicatorsViewModel @Inject constructor(private val userManager: UserManager,
                                               private val indicatorsRepository: IndicatorsRepository) : ViewModel() {
 
-    private val _currentUser = MutableLiveData<LoggedInUser>()
-    val currentUser: LiveData<LoggedInUser> get() = _currentUser
+    private val _currentUser = MutableLiveData<String>()
+    val currentUser: LiveData<String> get() = _currentUser
 
     private val _logoutResult = MutableLiveData<LogoutResult>()
     val logoutResult: LiveData<LogoutResult> get() = _logoutResult
@@ -25,7 +25,7 @@ class IndicatorsViewModel @Inject constructor(private val userManager: UserManag
 
     init {
         if (userManager.isLoggedIn) {
-            _currentUser.value = userManager.user
+            _currentUser.value = userManager.user?.displayName
         }
     }
 

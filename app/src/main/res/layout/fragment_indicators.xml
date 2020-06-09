@@ -18,6 +18,7 @@
             android:id="@+id/user_greeting_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{@string/user_greeting(indicators_view_model.currentUser)}"
             android:textSize="24sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
