@@ -43,6 +43,8 @@ class IndicatorsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        indicators_loading_progress_bar.visibility = View.VISIBLE
+
         indicators_recycler_view.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = IndicatorsAdapter(mutableListOf())
@@ -59,6 +61,7 @@ class IndicatorsFragment : Fragment() {
 
         indicatorsViewModel.indicatorsList.observe(viewLifecycleOwner,
             Observer {
+                indicators_loading_progress_bar.visibility = View.GONE
                 it?: return@Observer
 
                 (indicators_recycler_view.adapter as IndicatorsAdapter).update(it)
