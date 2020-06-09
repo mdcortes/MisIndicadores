@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.prueba.misindicadores.R
 
-class IndicatorDetailFragment : Fragment() {
+class IndicatorDetailsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = IndicatorDetailFragment()
+        fun newInstance() = IndicatorDetailsFragment()
     }
 
     private lateinit var viewModel: IndicatorDetailViewModel

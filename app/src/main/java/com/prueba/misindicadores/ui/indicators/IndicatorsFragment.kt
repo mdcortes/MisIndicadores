@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prueba.misindicadores.MisIndicadoresApplication
 import com.prueba.misindicadores.R
+import com.prueba.misindicadores.data.model.Indicator
 import com.prueba.misindicadores.databinding.FragmentIndicatorsBinding
 import kotlinx.android.synthetic.main.fragment_indicators.*
 import javax.inject.Inject
@@ -47,7 +48,7 @@ class IndicatorsFragment : Fragment() {
 
         indicators_recycler_view.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = IndicatorsAdapter(mutableListOf())
+            adapter = IndicatorsAdapter(mutableListOf(), onItemClick)
         }
 
         indicatorsViewModel.logoutResult.observe(viewLifecycleOwner,
@@ -66,6 +67,12 @@ class IndicatorsFragment : Fragment() {
 
                 (indicators_recycler_view.adapter as IndicatorsAdapter).update(it)
             })
+    }
+
+    private val onItemClick = { indicator: Indicator ->
+        findNavController().navigate(
+            IndicatorsFragmentDirections.details(indicator.codigo)
+        )
     }
 
     private fun onLogoutComplete() {
