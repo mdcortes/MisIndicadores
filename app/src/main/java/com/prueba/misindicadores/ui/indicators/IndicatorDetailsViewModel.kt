@@ -7,7 +7,7 @@ import com.prueba.misindicadores.data.IndicatorsRepository
 import com.prueba.misindicadores.data.model.Indicator
 import javax.inject.Inject
 
-class IndicatorDetailViewModel @Inject constructor(private val indicatorsRepository: IndicatorsRepository)
+class IndicatorDetailsViewModel @Inject constructor(private val indicatorsRepository: IndicatorsRepository)
     : ViewModel() {
 
     private val _indicator = MutableLiveData<Indicator>()

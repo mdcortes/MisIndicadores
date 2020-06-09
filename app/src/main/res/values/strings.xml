@@ -23,4 +23,9 @@
     <string name="indicator_value">Value: %1$.2f</string>
     <string name="indicator_name">Name: %1$s</string>
     <string name="logout">Logout</string>
+    <string name="indicator_code_label">Code:</string>
+    <string name="indicator_name_label">Name:</string>
+    <string name="indicator_unit_label">Measurement unit:</string>
+    <string name="indicator_date_label">Date:</string>
+    <string name="indicator_value_label">Value</string>
 </resources>
