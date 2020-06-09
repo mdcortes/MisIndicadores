@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/login_fragment"
         android:name="com.prueba.misindicadores.ui.login.LoginFragment"
-        android:label="fragment_login"
+        android:label="@string/login_title"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/register"
@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/register_fragment"
         android:name="com.prueba.misindicadores.ui.login.register.RegisterFragment"
-        android:label="fragment_register"
+        android:label="@string/register_title"
         tools:layout="@layout/fragment_register" >
         <argument
             android:name="email"
@@ -47,7 +47,7 @@
     <fragment
         android:id="@+id/indicators_fragment"
         android:name="com.prueba.misindicadores.ui.indicators.IndicatorsFragment"
-        android:label="fragment_indicators"
+        android:label="@string/indicators_title"
         tools:layout="@layout/fragment_indicators" >
         <action
             android:id="@+id/logout"
@@ -64,7 +64,7 @@
     <fragment
         android:id="@+id/indicator_details_fragment"
         android:name="com.prueba.misindicadores.ui.indicators.IndicatorDetailsFragment"
-        android:label="fragment_indicators"
+        android:label="@string/indicator_details_title"
         tools:layout="@layout/fragment_indicator_detail" >
 
         <argument
