@@ -16,4 +16,9 @@
     <string name="indicator_name">Nombre: %1$s</string>
     <string name="indicator_value">Valor: %1$.2f</string>
     <string name="logout">Cerrar sesión</string>
+    <string name="indicator_code_label">Código:</string>
+    <string name="indicator_name_label">Nombre:</string>
+    <string name="indicator_unit_label">Unidad de medida:</string>
+    <string name="indicator_date_label">Fecha:</string>
+    <string name="indicator_value_label">Valor:</string>
 </resources>

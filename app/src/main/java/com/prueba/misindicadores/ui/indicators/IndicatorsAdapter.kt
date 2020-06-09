@@ -8,10 +8,20 @@ import com.prueba.misindicadores.data.model.Indicator
 import com.prueba.misindicadores.databinding.IndicatorLayoutBinding
 
 
-class IndicatorsAdapter (private val indicators: MutableList<Indicator>) : Adapter<IndicatorsAdapter.IndicatorsViewHolder>() {
+class IndicatorsAdapter (private val indicators: MutableList<Indicator>,
+                         private val onItemClick: (Indicator) -> Unit
+)
+    : Adapter<IndicatorsAdapter.IndicatorsViewHolder>() {
 
-    inner class IndicatorsViewHolder(val indicatorsLayoutBinding: IndicatorLayoutBinding)
-        : RecyclerView.ViewHolder(indicatorsLayoutBinding.root)
+    inner class IndicatorsViewHolder(private val indicatorsLayoutBinding: IndicatorLayoutBinding)
+        : RecyclerView.ViewHolder(indicatorsLayoutBinding.root) {
+        fun bind(indicator: Indicator) {
+            indicatorsLayoutBinding.indicator = indicator
+            itemView.setOnClickListener {
+                onItemClick(indicator)
+            }
+        }
+    }
 
     fun update(indicatorList: List<Indicator>) {
         if (indicators != indicatorList) {
@@ -29,6 +39,6 @@ class IndicatorsAdapter (private val indicators: MutableList<Indicator>) : Adapt
     override fun getItemCount(): Int = indicators.size
 
     override fun onBindViewHolder(holder: IndicatorsViewHolder, position: Int) {
-        holder.indicatorsLayoutBinding.indicator = indicators[position]
+        holder.bind(indicators[position])
     }
 }

@@ -19,7 +19,7 @@ class IndicatorsViewModel @Inject constructor(private val userManager: UserManag
     private val _logoutResult = MutableLiveData<LogoutResult>()
     val logoutResult: LiveData<LogoutResult> get() = _logoutResult
 
-    private val _indicatorsList: MutableLiveData<List<Indicator>> = indicatorsRepository.getIndicators()
+    private val _indicatorsList: LiveData<List<Indicator>> = indicatorsRepository.indicators
     val indicatorsList: LiveData<List<Indicator>> get() = _indicatorsList
 
     init {

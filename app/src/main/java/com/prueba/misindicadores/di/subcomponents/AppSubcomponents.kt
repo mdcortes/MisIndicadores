@@ -24,7 +24,8 @@ import dagger.Module
         UserComponent::class,
         LoginComponent::class,
         RegisterComponent::class,
-        IndicatorsComponent::class
+        IndicatorsComponent::class,
+        IndicatorDetailsComponent::class
     ]
 )
 class AppSubcomponents
