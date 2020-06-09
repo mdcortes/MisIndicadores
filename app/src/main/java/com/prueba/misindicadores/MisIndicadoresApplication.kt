@@ -10,7 +10,7 @@ class MisIndicadoresApplication: Application() {
         initializeComponent()
     }
 
-    open fun initializeComponent(): AppComponent {
+    private open fun initializeComponent(): AppComponent {
         return DaggerAppComponent.factory().create(applicationContext)
     }
 }

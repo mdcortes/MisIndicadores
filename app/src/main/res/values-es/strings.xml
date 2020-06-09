@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mis Indicadores</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in">Iniciar sesión</string>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mis Indicadores</string>
+    <string name="app_name" translatable="false">Mis Indicadores</string>
 
     <!-- Strings common to login and register  -->
     <string name="prompt_email">Email</string>

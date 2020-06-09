@@ -1,8 +1,10 @@
 package com.prueba.misindicadores.ui.indicators
 
+import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -81,8 +83,23 @@ class IndicatorsFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.options_menu, menu)
-        val searchMenuItem = menu.findItem(R.id.code_search)
 
-        val searchView = searchMenuItem.actionView
+        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu.findItem(R.id.code_search).actionView as SearchView).apply {
+            setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+            setOnQueryTextListener(onQuery)
+        }
+    }
+
+    private val onQuery: SearchView.OnQueryTextListener = object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String): Boolean {
+            indicatorsViewModel.filterByCode(query)
+            return true
+        }
+
+        override fun onQueryTextChange(newText: String): Boolean {
+            indicatorsViewModel.filterByCode(newText)
+            return true
+        }
     }
 }
