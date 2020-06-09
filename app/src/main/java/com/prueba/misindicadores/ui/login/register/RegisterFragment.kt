@@ -130,7 +130,7 @@ class RegisterFragment : Fragment() {
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
 
-        findNavController().navigate(R.id.login_from_register)
+        findNavController().navigate(RegisterFragmentDirections.loginFromRegister())
     }
 
     private fun showRegisterFailed(@StringRes errorString: Int) {
