@@ -7,7 +7,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class IndicatorsRepository @Inject constructor(private val indicatorsDataSource: IndicatorsDataSource) {
     private val _indicators = MutableLiveData<List<Indicator>>()
     val indicators: LiveData<List<Indicator>> get() = _indicators

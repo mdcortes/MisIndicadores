@@ -9,7 +9,7 @@
             type="com.prueba.misindicadores.data.model.Indicator" />
         <variable
             name="dateFormat"
-            type="java.text.SimpleDateFormat" />
+            type="java.text.DateFormat" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="@{dateFormat.format(indicator.fecha)}"
+                android:text='@{indicator.fecha != null ? dateFormat.format(indicator.fecha) : ""}'
                 app:layout_constraintTop_toTopOf="@id/indicator_date_label"
                 app:layout_constraintBottom_toBottomOf="@id/indicator_date_label"
                 app:layout_constraintStart_toEndOf="@id/indicator_date_label"/>
