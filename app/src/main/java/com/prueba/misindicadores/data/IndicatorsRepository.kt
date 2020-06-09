@@ -1,5 +1,6 @@
 package com.prueba.misindicadores.data
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.prueba.misindicadores.data.model.Indicator
 import retrofit2.Call
@@ -8,8 +9,14 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class IndicatorsRepository @Inject constructor(private val indicatorsDataSource: IndicatorsDataSource) {
-    fun getIndicators() : MutableLiveData<List<Indicator>> {
-        val data = MutableLiveData<List<Indicator>>()
+    private val _indicators = MutableLiveData<List<Indicator>>()
+    val indicators: LiveData<List<Indicator>> get() = _indicators
+
+    init {
+        getIndicators()
+    }
+
+    private fun getIndicators() {
 
         indicatorsDataSource.requestIndicators().enqueue(object : Callback<MiIndicadorApiResponse> {
             override fun onResponse(
@@ -17,7 +24,7 @@ class IndicatorsRepository @Inject constructor(private val indicatorsDataSource:
                 response: Response<MiIndicadorApiResponse>
             ) {
                 if (response.isSuccessful) {
-                    data.value = response.body()?.indicadores
+                    _indicators.value = response.body()?.indicadores
                 }
             }
 
@@ -25,7 +32,9 @@ class IndicatorsRepository @Inject constructor(private val indicatorsDataSource:
                 // No hacemos nada
             }
         })
+    }
 
-        return data
+    fun getIndicatorByCode(indicatorCode: String): Indicator? {
+        return _indicators.value?.find { indicator -> indicator.codigo == indicatorCode }
     }
 }

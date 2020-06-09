@@ -9,12 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.prueba.misindicadores.MisIndicadoresApplication
 import com.prueba.misindicadores.R
+import com.prueba.misindicadores.databinding.FragmentIndicatorDetailBinding
 import javax.inject.Inject
 
 class IndicatorDetailsFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: IndicatorDetailViewModel
+    private lateinit var binding: FragmentIndicatorDetailBinding
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -27,11 +29,8 @@ class IndicatorDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_indicator_detail, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        binding = FragmentIndicatorDetailBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 }
