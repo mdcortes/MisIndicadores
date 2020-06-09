@@ -2,9 +2,7 @@ package com.prueba.misindicadores.ui.indicators
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -33,6 +31,8 @@ class IndicatorsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
+
         binding = FragmentIndicatorsBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = viewLifecycleOwner
@@ -77,5 +77,12 @@ class IndicatorsFragment : Fragment() {
 
     private fun onLogoutComplete() {
         findNavController().navigate(R.id.logout)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.options_menu, menu)
+        val searchMenuItem = menu.findItem(R.id.code_search)
+
+        val searchView = searchMenuItem.actionView
     }
 }

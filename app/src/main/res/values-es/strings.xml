@@ -25,4 +25,5 @@
     <string name="register_title">Registrarse</string>
     <string name="indicators_title">Mis Indicadores</string>
     <string name="indicator_details_title">Detalles Indicador</string>
+    <string name="code_search_title">Buscar por código</string>
 </resources>

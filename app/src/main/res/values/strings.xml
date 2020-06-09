@@ -34,4 +34,5 @@
     <string name="indicator_unit_label">Measurement unit:</string>
     <string name="indicator_date_label">Date:</string>
     <string name="indicator_value_label">Value:</string>
+    <string name="code_search_title">Search by code</string>
 </resources>

@@ -13,11 +13,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val navController = findNavController(R.id.nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.login_fragment, R.id.indicators_fragment)
-        )
-        
-        findViewById<Toolbar>(R.id.topAppBar)
-            .setupWithNavController(navController, appBarConfiguration)
+
+        navController.let {
+            val appBarConfiguration = AppBarConfiguration
+                .Builder()
+                .setFallbackOnNavigateUpListener {
+                    onBackPressed()
+                    true
+                }.build()
+
+            appBarConfiguration.topLevelDestinations.addAll(
+                setOf(
+                    R.id.login_fragment,
+                    R.id.indicators_fragment
+                )
+            )
+            val toolbar = findViewById<Toolbar>(R.id.topAppBar)
+            setSupportActionBar(toolbar)
+            toolbar.setupWithNavController(it, appBarConfiguration)
+        }
     }
 }
