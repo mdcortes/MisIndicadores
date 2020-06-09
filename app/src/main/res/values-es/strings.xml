@@ -12,4 +12,8 @@
     <string name="action_register">Registrarse</string>
     <string name="invalid_display_name">El nombre debe tener más de 5 caracteres</string>
     <string name="logout_failed">Logout no exitoso</string>
+    <string name="user_greeting">Hola %1$s</string>
+    <string name="indicator_name">Nombre: %1$s</string>
+    <string name="indicator_value">Valor: %1$.2f</string>
+    <string name="logout">Cerrar sesión</string>
 </resources>

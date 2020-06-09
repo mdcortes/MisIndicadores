@@ -58,7 +58,7 @@ class UserDataSource @Inject constructor(private val context: Context){
             apply()
         }
 
-        userPasswordsSharedPreferences.edit() {
+        userPasswordsSharedPreferences.edit {
             putString(uuid, password)
             apply()
         }
@@ -91,7 +91,7 @@ class UserDataSource @Inject constructor(private val context: Context){
                     return Result.Success(
                         LoggedInUser(
                             userIdsSharedPreferences.getString(username, "")!!,
-                            userDisplayNamesSharedPreferences.getString(username, "")!!
+                            userDisplayNamesSharedPreferences.getString(userId, "")!!
                         )
                     )
                 }

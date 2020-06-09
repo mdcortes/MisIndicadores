@@ -18,5 +18,9 @@
     <string name="invalid_display_name">Name must be >5 characters</string>
 
     <!-- Strings related to Indicators view -->
+    <string name="user_greeting">Hello %1$s</string>
     <string name="logout_failed">Logout failed</string>
+    <string name="indicator_value">Value: %1$.2f</string>
+    <string name="indicator_name">Name: %1$s</string>
+    <string name="logout">Logout</string>
 </resources>

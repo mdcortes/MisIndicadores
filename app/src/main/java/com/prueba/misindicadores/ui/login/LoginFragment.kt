@@ -15,17 +15,14 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.prueba.misindicadores.MisIndicadoresApplication
 import com.prueba.misindicadores.R
+import com.prueba.misindicadores.databinding.FragmentLoginBinding
+import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
 class LoginFragment: Fragment() {
     @Inject
     lateinit var loginViewModel: LoginViewModel
-
-    lateinit var usernameEditText: EditText
-    lateinit var passwordEditText: EditText
-    lateinit var loginButton: Button
-    lateinit var registerButton: Button
-    lateinit var loadingProgressBar: ProgressBar
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,36 +36,31 @@ class LoginFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        usernameEditText = view.findViewById(R.id.username)
-        passwordEditText = view.findViewById(R.id.password)
-        loginButton = view.findViewById(R.id.login)
-        registerButton = view.findViewById(R.id.register)
-        loadingProgressBar = view.findViewById(R.id.loading)
 
         loginViewModel.loginFormState.observe(viewLifecycleOwner,
             Observer { loginFormState ->
                 if (loginFormState == null) {
                     return@Observer
                 }
-                loginButton.isEnabled = loginFormState.isDataValid
+                login.isEnabled = loginFormState.isDataValid
                 loginFormState.usernameError?.let {
-                    usernameEditText.error = getString(it)
+                    username.error = getString(it)
                 }
                 loginFormState.passwordError?.let {
-                    passwordEditText.error = getString(it)
+                    password.error = getString(it)
                 }
             })
 
         loginViewModel.loginResult.observe(viewLifecycleOwner,
             Observer { loginResult ->
                 loginResult ?: return@Observer
-                loadingProgressBar.visibility = View.GONE
+                loading.visibility = View.GONE
                 loginResult.error?.let {
                     showLoginFailed(it)
                 }
@@ -88,38 +80,38 @@ class LoginFragment: Fragment() {
 
             override fun afterTextChanged(s: Editable) {
                 loginViewModel.loginDataChanged(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    username.text.toString(),
+                    password.text.toString()
                 )
             }
         }
-        usernameEditText.addTextChangedListener(afterTextChangedListener)
-        passwordEditText.addTextChangedListener(afterTextChangedListener)
-        passwordEditText.setOnEditorActionListener { _, actionId, _ ->
+        username.addTextChangedListener(afterTextChangedListener)
+        password.addTextChangedListener(afterTextChangedListener)
+        password.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 loginViewModel.login(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    username.text.toString(),
+                    password.text.toString()
                 )
             }
             false
         }
 
-        loginButton.setOnClickListener {
-            loadingProgressBar.visibility = View.VISIBLE
+        login.setOnClickListener {
+            loading.visibility = View.VISIBLE
             loginViewModel.login(
-                usernameEditText.text.toString(),
-                passwordEditText.text.toString()
+                username.text.toString(),
+                password.text.toString()
             )
         }
 
-        registerButton.setOnClickListener {
-            findNavController().navigate(createRegisterNavDirections())
+        register.setOnClickListener {
+            findNavController().navigate(registerNavDirections())
         }
     }
-    private fun createRegisterNavDirections() = LoginFragmentDirections.register(
-        usernameEditText.text.toString(),
-        passwordEditText.text.toString()
+    private fun registerNavDirections() = LoginFragmentDirections.register(
+        username.text.toString(),
+        password.text.toString()
     )
 
     private fun updateUiWithUser(model: LoggedInUserView) {

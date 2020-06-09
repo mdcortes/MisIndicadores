@@ -8,7 +8,6 @@ import com.prueba.misindicadores.data.Result
 import com.prueba.misindicadores.data.UserManager
 import com.prueba.misindicadores.ui.login.LoggedInUserView
 import com.prueba.misindicadores.ui.login.LoginChecks
-import com.prueba.misindicadores.ui.login.LoginResult
 import javax.inject.Inject
 
 class RegisterViewModel @Inject constructor(private val userManager: UserManager) : ViewModel() {
@@ -44,7 +43,7 @@ class RegisterViewModel @Inject constructor(private val userManager: UserManager
     }
 
     // A placeholder password validation check
-    fun isDisplayNameValid(displayName: String): Boolean {
+    private fun isDisplayNameValid(displayName: String): Boolean {
         return displayName.length > 5
     }
 }
