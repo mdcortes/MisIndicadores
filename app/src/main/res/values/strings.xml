@@ -27,5 +27,5 @@
     <string name="indicator_name_label">Name:</string>
     <string name="indicator_unit_label">Measurement unit:</string>
     <string name="indicator_date_label">Date:</string>
-    <string name="indicator_value_label">Value</string>
+    <string name="indicator_value_label">Value:</string>
 </resources>
