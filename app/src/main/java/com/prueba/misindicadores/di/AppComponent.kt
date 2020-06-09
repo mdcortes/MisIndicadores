@@ -19,5 +19,6 @@ interface AppComponent {
     fun loginComponent(): LoginComponent.Factory
     fun registerComponent(): RegisterComponent.Factory
     fun indicatorsComponent(): IndicatorsComponent.Factory
+    fun indicatorDetailsComponent(): IndicatorDetailsComponent.Factory
     fun userManager(): UserManager
 }
